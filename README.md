@@ -1,8 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Whome Management System v2
+
+## Overview
+Whome Management System v2 is an ISP management dashboard built for handling billing, tracking customers, and seamless WhatsApp-based notifications. It leverages Next.js on the frontend and uses Google Sheets via Google Apps Script (GAS) as an accessible, serverless backend database.
+
+## Features
+- **Dashboard Overview:** Track total active users, monthly revenue, pending payments, and overall growth.
+- **Customer Management:** Keep track of users with statuses like Active, and manage detailed profiles including service plans and connection IPs.
+- **Automated Billing Workflow:** Auto-generate billing on the 1st of every month for all active customers, with a fixed due date on the 5th.
+- **WhatsApp Integration:** No PDF or local storage required. All notifications operate via WhatsApp Click-to-Chat links, making it exceptionally easy to communicate with clients about their billing status.
+- **API Security:** API key validation integrated into all Google Apps Script REST requests.
+
+## Tech Stack
+- **Frontend Framework:** Next.js 16 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS + Shadcn UI
+- **Backend / Database:** Google Sheets API accessed via Google Apps Script (GAS) REST API
+- **Deployment:**
+  - *Frontend:* Vercel
+  - *Backend:* Google Web App (Apps Script)
 
 ## Getting Started
 
-First, run the development server:
+First, ensure all environment variables are properly set. You can use `.env.example` as a template to create your `.env.local` file:
+
+```bash
+cp .env.example .env.local
+```
+
+Next, install dependencies:
+
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
+
+Start the development server:
 
 ```bash
 npm run dev
@@ -14,23 +49,14 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the dashboard.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deployment Backend (Google Apps Script)
+1. Navigate to the `gas/` folder to view the backend scripts.
+2. Ensure you have `clasp` (Command Line Apps Script Projects) installed and authenticated.
+3. Push your code to the designated Apps Script project:
+```bash
+clasp push
+```
+4. Deploy the script as a Web App in the Google Apps Script editor, and retrieve the deployment URL.
+5. Update your `NEXT_PUBLIC_API_URL` environment variable within your Next.js project.
